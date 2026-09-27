@@ -262,7 +262,7 @@ export function CommandCenter({ facts, doctorName }: { facts: Fact[]; doctorName
 
       <div className="mx-auto max-w-6xl space-y-16 px-5 py-14 sm:px-6">
         {showTerminal ? (
-          <section id="run-log">
+          <section id="run-log" className="scroll-mt-[22rem]">
             <div className="overflow-hidden rounded-2xl border border-[#3B6BFF]/35 bg-[#111A2E] shadow-[0_0_48px_rgba(59,107,255,0.16)]">
               <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3">
                 <span className="h-2.5 w-2.5 rounded-full bg-[#F43F5E]" />
@@ -329,7 +329,7 @@ export function CommandCenter({ facts, doctorName }: { facts: Fact[]; doctorName
         ) : null}
 
         {hasRun && featured ? (
-          <section id="alert" className="grid items-center gap-10 lg:grid-cols-[minmax(0,1fr)_300px]">
+          <section id="alert" className="grid scroll-mt-[22rem] items-center gap-10 lg:grid-cols-[minmax(0,1fr)_300px]">
             <article className="rounded-2xl border border-[#E6EAF2] border-l-4 border-l-[#F43F5E] bg-white p-6 shadow-[0_10px_40px_rgba(15,26,51,0.06)] sm:p-8">
               <ChangeBadge type={featured.changeType} direction={featured.direction} />
               <h2 className="mt-4 text-3xl font-extrabold tracking-tight">{shortDrug(featured.drugName)}</h2>
