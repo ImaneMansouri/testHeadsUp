@@ -1,0 +1,23 @@
+{
+  "before": {
+    "id": "v1",
+    "label": "CMS quarterly formulary file, Q2 2026",
+    "sourceFile": "SPUF_2026_20260701.zip",
+    "capturedAt": "2026-07-01",
+    "rows": [
+      { "planId": "H1170-002", "planName": "Kaiser Permanente Senior Advantage Enhanced 1 (HMO)", "insurer": "Kaiser Permanente", "formularyId": "00026405", "rxcui": "1653204", "drugName": "NovoLog FlexPen (insulin aspart)", "covered": true, "tier": 3, "priorAuthorization": false, "stepTherapy": false, "quantityLimit": false, "estMonthlyCost": 47.00 },
+      { "planId": "S5884-135", "planName": "Humana Basic Rx Plan (PDP)", "insurer": "Humana", "formularyId": "00026399", "rxcui": "1653204", "drugName": "NovoLog FlexPen (insulin aspart)", "covered": true, "tier": 3, "priorAuthorization": false, "stepTherapy": false, "quantityLimit": false, "estMonthlyCost": 133.56 },
+      { "planId": "S5884-135", "planName": "Humana Basic Rx Plan (PDP)", "insurer": "Humana", "formularyId": "00026399", "rxcui": "1364445", "drugName": "Eliquis 5 mg (apixaban)", "covered": true, "tier": 3, "priorAuthorization": false, "stepTherapy": false, "quantityLimit": true, "estMonthlyCost": null }
+    ]
+  },
+  "after": {
+    "id": "v2-cms",
+    "label": "CMS monthly formulary file, September 2026",
+    "sourceFile": "2026_20260916.zip",
+    "capturedAt": "2026-09-16",
+    "rows": [
+      { "planId": "S5884-135", "planName": "Humana Basic Rx Plan (PDP)", "insurer": "Humana", "formularyId": "00026399", "rxcui": "1653204", "drugName": "NovoLog FlexPen (insulin aspart)", "covered": true, "tier": 3, "priorAuthorization": false, "stepTherapy": false, "quantityLimit": false, "estMonthlyCost": 133.56 },
+      { "planId": "S5884-135", "planName": "Humana Basic Rx Plan (PDP)", "insurer": "Humana", "formularyId": "00026399", "rxcui": "1364445", "drugName": "Eliquis 5 mg (apixaban)", "covered": true, "tier": 3, "priorAuthorization": false, "stepTherapy": false, "quantityLimit": true, "estMonthlyCost": null }
+    ]
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "doc-001",
+  "name": "Dr. Amina Lee",
+  "specialty": "Internal Medicine",
+  "practice": "Peachtree Family Medicine, Atlanta GA",
+  "patients": [
+    { "id": "pt-001", "name": "Diane Whitfield", "planId": "H1170-002", "rxcuis": ["1653204"] },
+    { "id": "pt-002", "name": "Marcus Reyes", "planId": "H1170-002", "rxcuis": ["1653204"] },
+    { "id": "pt-003", "name": "Sandra Nguyen", "planId": "H1170-002", "rxcuis": ["1653204"] },
+    { "id": "pt-004", "name": "Harold Betancourt", "planId": "S5884-135", "rxcuis": ["1653204"] },
+    { "id": "pt-005", "name": "Rosa Lindqvist", "planId": "S5884-135", "rxcuis": ["1653204", "1364445"] }
+  ]
+}
