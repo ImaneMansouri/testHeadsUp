@@ -119,6 +119,7 @@ No refill-delay baseline is invented. The before/after comparison is the compute
 - Preview mode, with no Twilio or XAI credentials: the command center demo (run, text, mobile prior auth, desktop timeline turns green, reset) completed three times in a row in Chrome, including after Reset demo.
 - The CMS catalog fetch in the watch log returned a real modified date (`2026-09-23`) for the monthly formulary dataset.
 - `/changes`, the doctor detail page (patient names, insulin judgment line, evidence files), and `/how-it-works` render.
+- `/impact` in Chrome, preview mode: before a run the file cards show 1 change, 3 patients, est. $141.00/mo, and 77 days, and the session funnel is zero. After the watch, the session shows 1 change and 3 patients with no text yet. After the preview text, texts sent and doctors alerted become 1 and file-check-to-text is a measured duration (4s in that pass). After prior auth, that count becomes 1 and text-to-resolution is measured (6s in that pass). Reset demo returns the session counts and clocks to zero and leaves the file exposure and the 77-day gap in place. The Command Center strip shows the same patient, cost, text, and prior-auth figures. The page also renders at 390px, including the Impact item in the menu.
 
 ## Not verified here
 
