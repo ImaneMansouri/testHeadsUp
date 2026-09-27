@@ -1,0 +1,6 @@
+[
+  { "value": "79%", "label": "of physicians say patients abandon treatment due to prior authorization", "source": "AMA physician survey, released May 2026", "url": "https://www.ama-assn.org/press-center/ama-press-releases/ama-survey-prior-authorization-reform-pledge-falls-short-physicians" },
+  { "value": "13 hrs", "label": "per week physicians and staff spend on prior authorization", "source": "AMA physician survey, released May 2026", "url": "https://www.ama-assn.org/press-center/ama-press-releases/ama-survey-prior-authorization-reform-pledge-falls-short-physicians" },
+  { "value": "27%", "label": "of U.S. adults didn't fill a prescription in the past year because of cost", "source": "KFF Health Tracking Poll, 2026", "url": "https://www.kff.org/health-costs/americans-challenges-with-health-care-costs/" },
+  { "value": "1,202", "label": "drug coverage rows dropped across Georgia Medicare formularies between the Q2 and September 2026 CMS files", "source": "Our analysis of CMS Part D formulary files", "url": "https://data.cms.gov/provider-summary-by-type-of-service/medicare-part-d-prescribers/monthly-prescription-drug-plan-formulary-and-pharmacy-network-information" }
+]
