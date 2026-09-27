@@ -130,7 +130,13 @@ function Linkified({ text }: { text: string }) {
     <p className="whitespace-pre-wrap break-words">
       {parts.map((part, index) =>
         part.startsWith("http") ? (
-          <a key={index} href={part} className="font-semibold text-[#3B6BFF] underline" target="_blank" rel="noreferrer">
+          <a
+            key={index}
+            href={part}
+            className="mt-1 block overflow-x-auto whitespace-nowrap font-semibold text-[#3B6BFF] underline"
+            target="_blank"
+            rel="noreferrer"
+          >
             {part}
           </a>
         ) : (

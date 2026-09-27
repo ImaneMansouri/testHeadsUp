@@ -78,6 +78,13 @@ Local preview is one Node process, so memory plus `data/state.json` is enough fo
 
 `POST /api/demo/reset` clears every tier of the store this process can reach, including Redis when it is configured.
 
+## Verified in this environment
+
+- `npm test`, `npx tsc --noEmit`, `npm run lint`, and `npm run build` pass.
+- Preview mode, with no Twilio or XAI credentials: the command center demo (run, text, mobile prior auth, desktop timeline turns green, reset) completed three times in a row in Chrome, including after Reset demo.
+- The CMS catalog fetch in the watch log returned a real modified date (`2026-09-23`) for the monthly formulary dataset.
+- `/changes`, the doctor detail page (patient names, insulin judgment line, evidence files), and `/how-it-works` render.
+
 ## Not verified here
 
 - A real Twilio delivery. No account credentials are configured; preview mode is what this environment can prove.
