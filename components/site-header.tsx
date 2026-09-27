@@ -22,6 +22,7 @@ export type HeaderDoctor = {
 
 const LINKS = [
   { href: "/", label: "Command Center" },
+  { href: "/impact", label: "Impact" },
   { href: "/changes", label: "Changes" },
   { href: "/how-it-works", label: "How it works" },
 ];

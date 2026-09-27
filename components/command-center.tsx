@@ -4,6 +4,7 @@ import { Check, Database, MessageSquare, Radar, ShieldCheck, UserRoundX } from "
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { GapTimeline, type GapPhase } from "@/components/gap-timeline";
+import { ImpactStrip } from "@/components/impact-strip";
 import { InlineError } from "@/components/inline-error";
 import { PhoneMock, playNotifyTone, type PhonePhase } from "@/components/phone-mock";
 import { SnapshotChart } from "@/components/snapshot-chart";
@@ -261,6 +262,7 @@ export function CommandCenter({ facts, doctorName }: { facts: Fact[]; doctorName
       <WaveDivider />
 
       <div className="mx-auto max-w-6xl space-y-16 px-5 py-14 sm:px-6">
+        <ImpactStrip />
         {showTerminal ? (
           <section id="run-log" className="scroll-mt-[22rem]">
             <div className="overflow-hidden rounded-2xl border border-[#3B6BFF]/35 bg-[#111A2E] shadow-[0_0_48px_rgba(59,107,255,0.16)]">

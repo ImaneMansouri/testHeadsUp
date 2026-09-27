@@ -78,6 +78,41 @@ Local preview is one Node process, so memory plus `data/state.json` is enough fo
 
 `POST /api/demo/reset` clears every tier of the store this process can reach, including Redis when it is configured.
 
+## Impact dashboard
+
+`/impact` and the Command Center strip read `GET /api/impact`. That route diffs the same snapshots, matches the same roster, and reads the same alert store as the rest of the demo (memory, `data/state.json` or `/tmp`, and KV when configured). Polling is every 3 seconds. Reset demo clears runs and statuses, so the session metrics return to zero. The file metrics do not.
+
+| Metric | Meaning | Source |
+| --- | --- | --- |
+| Changes in the files | Coverage diffs in the watched pair of snapshots. This demo has 1 (Kaiser NovoLog removed). | `compareSnapshots` on `data/snapshots.json` |
+| Plans / drugs affected | Unique `planId` and `rxcui` on those diffs. | Same diff |
+| Plans watched, drugs watched, pairs compared | Unique plan ids and RxCUIs across both files. Pairs are `(planId, rxcui)` keys in the earlier file. | Both snapshot files |
+| Patients matched | Unique synthetic patients on worsened changes, in panel order rules from `affectedPatients`. Improved changes match nobody. | `data/doctor.json` |
+| Doctors in the panel | 1. The demo has one doctor record. | `data/doctor.json` |
+| Est. prior monthly cost | For a removal, the earlier row's `estMonthlyCost` times matched patients, when that cost is a finite number. For a tier increase, `(after − before)` times matched patients, only when both costs are finite and the later cost is higher. Prior auth, step therapy, and quantity limit do not invent a dollar. | `estMonthlyCost` on the snapshot rows |
+| Unknown prices | A null cost increments the unknown-patient count and is excluded from the sum. If every contributing price is missing, the total is Unknown, not est. $0.00. A real cost of 0 is a known zero. | Same rows |
+| Uncovered cash price | Not in the files. The dashboard does not treat the prior formulary cost as the price a patient pays after a removal. | Not computed |
+| Days between CMS files | Whole UTC days from the earlier `capturedAt` to the later one. 2026-07-01 to 2026-09-16 is 77. This is the publication gap, the time between files with no alert in that window. It is not a measured pharmacy wait and not days without medicine. | Snapshot `capturedAt` fields |
+| Detected this session / patients matched this session | `changeCount` and `patientCount` on the newest run. Zero before a watch. | Alert store `runs` |
+| Texts sent | Changes in the current diff whose status has `notifiedAt`. Preview sends count, because preview marks the change notified. | Alert store `statuses` |
+| Doctors alerted | 1 after any text in this session, otherwise 0. One doctor is on the roster. | Statuses plus the doctor record |
+| Patients on the text | Unique patients on worsened changes that were notified. | Statuses plus the roster |
+| Prior auths started, switched, reviewed | Counts of those resolve actions on current changes. | Alert store `statuses` |
+| File check → text | Earliest run `startedAt` to earliest `notifiedAt`, when both parse and the text is not before the run. Otherwise a dash, not 0. | Run and status timestamps |
+| Text → resolution | Earliest `notifiedAt` to earliest `resolvedAt`, same rule. | Status timestamps |
+| Session funnel | Changes detected, patients matched, doctors alerted, prior auths started, using the session numbers above. | Same session fields |
+| Time-to-alert chart | Only the clocks that have both timestamps. Unmeasured durations are omitted, not plotted as zero. | Same clocks |
+| Scale-up projection | Cited dropped-row count × the single known prior monthly cost on removed drugs in this snapshot. 1,202 × est. $47.00 = est. $56,494.00/mo for this demo. If there is no known removed-drug price, or more than one distinct price, the total is Unknown. Prices are not averaged. | Multiplier from `facts.json`; unit cost from the snapshot |
+
+Figures that are not computed from the watch:
+
+- **1,202** drug coverage rows dropped across Georgia Medicare formularies between the Q2 and September 2026 CMS files. Source on the card: “Our analysis of CMS Part D formulary files”, [CMS monthly formulary dataset](https://data.cms.gov/provider-summary-by-type-of-service/medicare-part-d-prescribers/monthly-prescription-drug-plan-formulary-and-pharmacy-network-information). Used only as the projection multiplier. It is not a count of rows in this watch set. The dollar total is computed; the row count is cited.
+- **Assumption, labeled on the projection card:** every cited dropped row had that same prior monthly cost for one month. They did not. Unknown prices are not filled with $0. The result is a projection, not a CMS statistic.
+- **79%** of physicians say patients abandon treatment due to prior authorization, and **13 hrs** per week physicians and staff spend on prior authorization. AMA physician survey, released May 2026. https://www.ama-assn.org/press-center/ama-press-releases/ama-survey-prior-authorization-reform-pledge-falls-short-physicians Shown as cited context, not as a Heads Up measurement.
+- **27%** of U.S. adults didn't fill a prescription in the past year because of cost. KFF Health Tracking Poll, 2026. https://www.kff.org/health-costs/americans-challenges-with-health-care-costs/ Shown as cited context, not as a Heads Up measurement.
+
+No refill-delay baseline is invented. The before/after comparison is the computed 77-day file gap against the measured session durations.
+
 ## Verified in this environment
 
 - `npm test`, `npx tsc --noEmit`, `npm run lint`, and `npm run build` pass.
