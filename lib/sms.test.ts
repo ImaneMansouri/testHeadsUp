@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { compareSnapshots } from "./compare";
-import { getDoctor, getSnapshots } from "./data";
+import { getSnapshots } from "./data";
 import { buildSms } from "./sms";
 import type { Change, ChangeType } from "./types";
 

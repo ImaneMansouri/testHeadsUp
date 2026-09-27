@@ -80,6 +80,7 @@ export type StoredStatus = {
   resolvedAt: string | null;
   notifiedAt: string | null;
   smsBody: string | null;
+  smsMode: "preview" | "twilio" | null;
 };
 
 export type WatchStep = {

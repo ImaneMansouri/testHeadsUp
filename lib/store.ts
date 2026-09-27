@@ -159,7 +159,11 @@ export async function recordRun(run: StoredRun): Promise<void> {
   });
 }
 
-export async function markNotified(changeId: string, smsBody: string): Promise<void> {
+export async function markNotified(
+  changeId: string,
+  smsBody: string,
+  smsMode: "preview" | "twilio",
+): Promise<void> {
   await serialize(async () => {
     const state = await loadNewest();
     const current = state.statuses[changeId];
@@ -169,6 +173,7 @@ export async function markNotified(changeId: string, smsBody: string): Promise<v
       resolvedAt: current?.resolvedAt ?? null,
       notifiedAt: new Date().toISOString(),
       smsBody,
+      smsMode,
     };
     state.statuses[changeId] = next;
     state.lastNotifiedChangeId = changeId;
@@ -188,6 +193,7 @@ export async function resolveChange(changeId: string, action: ResolveAction): Pr
       resolvedAt: new Date().toISOString(),
       notifiedAt: current?.notifiedAt ?? null,
       smsBody: current?.smsBody ?? null,
+      smsMode: current?.smsMode ?? null,
     };
     touch(state);
     await persist(state);
@@ -207,6 +213,7 @@ export async function applyInboundReview(): Promise<{ ok: boolean; changeId: str
         resolvedAt: new Date().toISOString(),
         notifiedAt: current?.notifiedAt ?? null,
         smsBody: current?.smsBody ?? null,
+        smsMode: current?.smsMode ?? null,
       };
       touch(state);
       await persist(state);

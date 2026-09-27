@@ -1,7 +1,7 @@
 import { checkCmsCatalog } from "./cms";
 import { compareSnapshots } from "./compare";
 import { getDoctor, getSnapshots } from "./data";
-import { watchCounts } from "./stats";
+import { watchCounts, type WatchCounts } from "./stats";
 import type { Change, WatchStep } from "./types";
 
 function elapsed(start: number): number {
@@ -15,7 +15,7 @@ function plural(count: number, singular: string, pluralLabel: string): string {
 export async function runWatch(options?: {
   cmsTimeoutMs?: number;
   fetchImpl?: typeof fetch;
-}): Promise<{ steps: WatchStep[]; changes: Change[] }> {
+}): Promise<{ steps: WatchStep[]; changes: Change[]; counts: WatchCounts }> {
   const steps: WatchStep[] = [];
   const { before, after } = getSnapshots();
   const doctor = getDoctor();
@@ -50,5 +50,5 @@ export async function runWatch(options?: {
     ms: elapsed(matchStart),
   });
 
-  return { steps, changes };
+  return { steps, changes, counts };
 }

@@ -20,7 +20,7 @@ describe("state store", () => {
     process.env.HEADSUP_STATE_PATH = file;
     __resetMemoryForTests();
     await resetDemo();
-    await markNotified("change-1", "sms");
+    await markNotified("change-1", "sms", "preview");
     await resolveChange("change-1", "prior_auth_started");
     __resetMemoryForTests();
     const restored = await getState();

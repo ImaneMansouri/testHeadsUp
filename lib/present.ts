@@ -14,6 +14,8 @@ export type AnnotatedChange = Change & {
   notified: boolean;
   resolvedAt: string | null;
   notifiedAt: string | null;
+  smsBody: string | null;
+  smsMode: "preview" | "twilio" | null;
 };
 
 async function bundle() {
@@ -32,6 +34,8 @@ async function bundle() {
       notified: Boolean(stored?.notifiedAt),
       resolvedAt: stored?.resolvedAt ?? null,
       notifiedAt: stored?.notifiedAt ?? null,
+      smsBody: stored?.smsBody ?? null,
+      smsMode: stored?.smsMode ?? null,
     };
   });
   return { before, after, doctor, changes, state, counts, annotated };

@@ -68,18 +68,26 @@ export async function explainChange(
       }),
       signal: AbortSignal.timeout(4000),
     });
-    if (!response.ok) return { text: template, source: "template" };
+    if (!response.ok) {
+      const fallback = { text: template, source: "template" as const };
+      cache.set(change.id, fallback);
+      return fallback;
+    }
     const payload = (await response.json()) as {
       choices?: { message?: { content?: string } }[];
     };
     const text = payload.choices?.[0]?.message?.content?.trim();
     if (!text || containsPatientName(text, patientNames)) {
-      return { text: template, source: "template" };
+      const fallback = { text: template, source: "template" as const };
+      cache.set(change.id, fallback);
+      return fallback;
     }
     const result = { text, source: "grok" as const };
     cache.set(change.id, result);
     return result;
   } catch {
-    return { text: template, source: "template" };
+    const fallback = { text: template, source: "template" as const };
+    cache.set(change.id, fallback);
+    return fallback;
   }
 }
